@@ -23,7 +23,7 @@ export const PizzaBlock = ({ id, imageUrl, title, types, price, sizes }) => {
         <ul>
           {sizes.map((size, i) => (
             <li
-            key={i}
+              key={i}
               onClick={() => setSizeSelector(i)}
               className={sizeSelector === i ? 'active' : ''}
             >

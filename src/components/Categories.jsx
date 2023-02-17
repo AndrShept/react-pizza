@@ -15,7 +15,7 @@ export const Categories = () => {
       <ul>
         {listPizza.map((item, i) => (
           <li
-          key={i}
+            key={i}
             onClick={() => setSelected(i)}
             className={selected === i ? 'active' : ''}
           >
