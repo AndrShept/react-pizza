@@ -14,7 +14,13 @@ export const Categories = () => {
     <div className='categories'>
       <ul>
         {listPizza.map((item, i) => (
-          <li onClick={() => setSelected(i)} className={selected === i ?'active':''}>{item}</li>
+          <li
+          key={i}
+            onClick={() => setSelected(i)}
+            className={selected === i ? 'active' : ''}
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </div>
