@@ -6,20 +6,21 @@ import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 
-// import dbList from './assets/pizza.json';
+export const AppContext = React.createContext();
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState('');
   return (
     <div className='App'>
       <div className='wrapper'>
-        <Header />
-        <Routes>
-          
-          <Route path='/' element={<Home />} />
-          <Route path='cart' element={<Cart />} />
-          <Route path='*' element={<NotFound/>} />
-
-        </Routes>
+        <AppContext.Provider value={{ searchValue, setSearchValue }}>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='cart' element={<Cart />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </AppContext.Provider>
       </div>
     </div>
   );

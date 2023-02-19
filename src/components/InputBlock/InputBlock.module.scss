@@ -1,0 +1,31 @@
+.root {
+  position: relative;
+}
+.input {
+  font-size: 15px;
+  width: 300px;
+  padding: 8px 6px;
+  border: 2px solid rgb(156, 156, 156);
+  opacity: 0.6;
+  border-radius: 5px;
+  padding-left: 30px;
+  &:focus {
+    border: 2.2px solid darkslateblue;
+    opacity: 1;
+  }
+}
+.serchIcon {
+  opacity: 0.8;
+  position: absolute;
+  left: 8px;
+  top: 13px;
+}
+.closeIcon {
+  opacity: 0.6;
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  &:hover {
+    opacity: 1;
+  }
+}
