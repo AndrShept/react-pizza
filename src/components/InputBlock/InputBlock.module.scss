@@ -1,26 +1,38 @@
 .root {
   position: relative;
+
 }
 .input {
   font-size: 15px;
   width: 300px;
   padding: 8px 6px;
-  border: 2px solid rgb(156, 156, 156);
+  border: 2.3px solid rgb(156, 156, 156);
   opacity: 0.6;
   border-radius: 5px;
   padding-left: 30px;
+  box-shadow: 13px 13px 21px -4px rgba(230,223,230,1);
+
   &:focus {
-    border: 2.2px solid darkslateblue;
+    border: 2.3px solid rgb(0, 0, 0);
     opacity: 1;
+   
   }
+
+  @media (max-width: 550px) {
+
+    width: 200px;
+    // width: 400px;
+  }
+
 }
 .serchIcon {
   opacity: 0.8;
   position: absolute;
-  left: 8px;
-  top: 13px;
+  left: 10px;
+  top: 14px;
 }
 .closeIcon {
+  color: red($color: #000000);
   opacity: 0.6;
   position: absolute;
   right: 12px;

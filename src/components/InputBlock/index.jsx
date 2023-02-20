@@ -4,8 +4,8 @@ import styles from './InputBlock.module.scss';
 import { TfiSearch, TfiClose } from 'react-icons/tfi';
 import { AppContext } from '../../App';
 export const InputBlock = () => {
-    const {searchValue,setSearchValue} = React.useContext(AppContext)
-  console.log('@@@@', searchValue);
+  const { searchValue, setSearchValue } = React.useContext(AppContext);
+  // console.log('@@@@', searchValue);
   return (
     <div className={styles.root}>
       <TfiSearch className={styles.serchIcon} />
@@ -18,6 +18,7 @@ export const InputBlock = () => {
       />
       {searchValue && (
         <TfiClose
+        
           onClick={() => setSearchValue('')}
           className={styles.closeIcon}
         />

@@ -11,6 +11,7 @@ export const Home = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   
   React.useEffect(() => {
+    // setIsLoading(true);
     fetch(`https://63ef5425c59531ccf16d0584.mockapi.io/items?${search} `)
       .then((res) => res.json())
       .then((arr) => {

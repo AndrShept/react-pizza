@@ -81,7 +81,7 @@ export const Cart = () => {
               <span>Очистить корзину</span>
             </div>
           </div>
-          <div className='content__items'>
+          <div className='items'>
             <div className='cart__item'>
               <div className='cart__item-img'>
                 <img
