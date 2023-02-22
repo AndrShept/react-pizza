@@ -1,6 +1,7 @@
 import React from 'react';
 
-export const Categories = () => {
+export const Categories = ({categoryId,onChangeCategory}) => {
+  
   const listPizza = [
     'Всі',
     'Мясна',
@@ -9,16 +10,18 @@ export const Categories = () => {
     'Гостра',
     'Закрита',
   ];
-  const [selected, setSelected] = React.useState(0);
+  // const [selected, setSelected] = React.useState(0);
   return (
+    
     <div className='categories'>
       <ul>
         {listPizza.map((item, i) => (
           <li
             key={i}
-            onClick={() => setSelected(i)}
-            className={selected === i ? 'active' : ''}
+            onClick={() => onChangeCategory(i)}
+            className={categoryId === i ? 'active' : ''}
           >
+            
             {item}
           </li>
         ))}

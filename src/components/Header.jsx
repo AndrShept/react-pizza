@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PizzaLogo from '../assets/img/pizza-logo.svg';
-import { InputBlock } from './InputBlock';
+import { SearchBlock } from './SearchBlock';
 
 export const Header = () => {
   return (
@@ -16,7 +16,7 @@ export const Header = () => {
           </div>
         </div>
         </Link>
-        <InputBlock />
+        <SearchBlock />
         <div className='header__cart'>
           <Link to='/cart' className='button button--cart'>
             <span>520 ₽</span>
