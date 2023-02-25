@@ -6,36 +6,32 @@ import { Categories } from '../components/Categories';
 import { AppContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
-import axios from 'axios';
+import {fetchPizzas} from '../redux/slices/pizzaSlice'
 export const Home = () => {
   const { searchValue } = React.useContext(AppContext);
-  const {sortLabel} = React.useContext(AppContext);
-  const search = searchValue ? `search=${searchValue}` : '';
-  const [pizzaList, setPizzaList] = React.useState([]);
+  const { sortLabel } = React.useContext(AppContext);
   const [isLoading, setIsLoading] = React.useState(true);
-
   const sort = useSelector((state) => state.filter.sort.sortProperty);
   const categoryId = useSelector((state) => state.filter.categoryId);
+  const { items } = useSelector((state) => state.pizza);
   const dispatch = useDispatch();
 
   const onChangeCategory = (i) => {
     dispatch(setCategoryId(i));
   };
+  const search = searchValue ? `search=${searchValue}` : '';
   const categId = categoryId ? `&category=${categoryId}` : '';
   const selectSort = sort ? `&orderBy=${sort}` : '';
-  const sortAscDesc = sortLabel ?  `&order=desc`: `&order=asc`
-  
+  const sortAscDesc = sortLabel ? `&order=desc` : `&order=asc`;
+  function getPizzas() {
+    dispatch(fetchPizzas({ search, categId, selectSort, sortAscDesc }));
+    setIsLoading(false);
+  }
+
   React.useEffect(() => {
     // setIsLoading(true);
-    axios.get(
-      `https://63ef5425c59531ccf16d0584.mockapi.io/items?${search}${categId}${selectSort}${sortAscDesc}`
-    )
-      
-      .then((arr) => {
-        setPizzaList(arr.data);
-        setIsLoading(false);
-      });
-  }, [searchValue,categoryId,selectSort,sortAscDesc]);
+    getPizzas();
+  }, [searchValue, categoryId, selectSort, sortAscDesc, search, categId]);
   return (
     <div className='content'>
       <div className='container'>
@@ -50,9 +46,7 @@ export const Home = () => {
         <div className='content__items'>
           {isLoading
             ? [...new Array(8)].map((_, i) => <Skeleton key={i} />)
-            : pizzaList.map((value, i) => (
-                <PizzaBlock key={value.id} {...value} />
-              ))}
+            : items.map((value, i) => <PizzaBlock key={value.id} {...value} />)}
         </div>
       </div>
     </div>

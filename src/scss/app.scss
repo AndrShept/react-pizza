@@ -326,4 +326,16 @@ body {
       font-size: 18px;
     }
   }
+  ion-icon {
+    font-size: 40px;
+    margin-top: 10px;
+    
+    &:hover{
+      // background-color: #3f7cd6;
+      
+      color: blueviolet;
+    }
+  }
+
+  
 }

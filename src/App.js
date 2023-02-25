@@ -5,17 +5,17 @@ import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 
-
 export const AppContext = React.createContext();
 
 function App() {
-  
   const [searchValue, setSearchValue] = React.useState('');
-  const [sortLabel, setSortLabel] = React.useState(true)
+  const [sortLabel, setSortLabel] = React.useState(true);
   return (
     <div className='App'>
       <div className='wrapper'>
-        <AppContext.Provider value={{ searchValue, setSearchValue,sortLabel,setSortLabel }}>
+        <AppContext.Provider
+          value={{ searchValue, setSearchValue, sortLabel, setSortLabel }}
+        >
           <Header />
           <Routes>
             <Route path='/' element={<Home />} />

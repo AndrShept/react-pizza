@@ -6,7 +6,9 @@
     display: flex;
     align-items: center;
 
-
+  &__arrow{
+    cursor: pointer;
+  }
 
     b {
       margin-right: 8px;
