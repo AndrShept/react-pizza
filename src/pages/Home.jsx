@@ -6,16 +6,16 @@ import { Categories } from '../components/Categories';
 import { AppContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
-import {fetchPizzas} from '../redux/slices/pizzaSlice'
+import { fetchPizzas, setIsLoading } from '../redux/slices/pizzaSlice';
+import { Link } from 'react-router-dom';
 export const Home = () => {
   const { searchValue } = React.useContext(AppContext);
   const { sortLabel } = React.useContext(AppContext);
-  const [isLoading, setIsLoading] = React.useState(true);
+
   const sort = useSelector((state) => state.filter.sort.sortProperty);
   const categoryId = useSelector((state) => state.filter.categoryId);
-  const { items } = useSelector((state) => state.pizza);
+  const { items, isLoading } = useSelector((state) => state.pizza);
   const dispatch = useDispatch();
-
   const onChangeCategory = (i) => {
     dispatch(setCategoryId(i));
   };
@@ -23,14 +23,15 @@ export const Home = () => {
   const categId = categoryId ? `&category=${categoryId}` : '';
   const selectSort = sort ? `&orderBy=${sort}` : '';
   const sortAscDesc = sortLabel ? `&order=desc` : `&order=asc`;
+
   function getPizzas() {
     dispatch(fetchPizzas({ search, categId, selectSort, sortAscDesc }));
-    setIsLoading(false);
   }
 
   React.useEffect(() => {
     // setIsLoading(true);
     getPizzas();
+    setIsLoading(false);
   }, [searchValue, categoryId, selectSort, sortAscDesc, search, categId]);
   return (
     <div className='content'>
@@ -46,7 +47,7 @@ export const Home = () => {
         <div className='content__items'>
           {isLoading
             ? [...new Array(8)].map((_, i) => <Skeleton key={i} />)
-            : items.map((value, i) => <PizzaBlock key={value.id} {...value} />)}
+            : items.map((value, i) =>  <PizzaBlock key={value.id} {...value} /> )}
         </div>
       </div>
     </div>

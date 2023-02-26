@@ -47,6 +47,17 @@ body {
       margin-bottom: 10px;
     }
   }
+  &__pizza--info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    p{
+      color: chocolate;
+      font-size: 25px;
+      font-weight: 700;
+    }
+  }
 }
 
 .container {

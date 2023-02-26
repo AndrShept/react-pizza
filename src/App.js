@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { PizzaInfo } from './pages/PizzaInfo';
 
 export const AppContext = React.createContext();
 
@@ -21,6 +22,9 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />
+            <Route path='/pizza/:id' element={<PizzaInfo/>} />
+            
+
           </Routes>
         </AppContext.Provider>
       </div>
