@@ -6,8 +6,8 @@ import { Categories } from '../components/Categories';
 import { AppContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
-import { fetchPizzas, setIsLoading } from '../redux/slices/pizzaSlice';
-import { Link } from 'react-router-dom';
+import { fetchPizzas} from '../redux/slices/pizzaSlice';
+
 export const Home = () => {
   const { searchValue } = React.useContext(AppContext);
   const { sortLabel } = React.useContext(AppContext);
@@ -24,15 +24,16 @@ export const Home = () => {
   const selectSort = sort ? `&orderBy=${sort}` : '';
   const sortAscDesc = sortLabel ? `&order=desc` : `&order=asc`;
 
-  function getPizzas() {
-    dispatch(fetchPizzas({ search, categId, selectSort, sortAscDesc }));
-  }
+
 
   React.useEffect(() => {
+    function getPizzas() {
+      dispatch(fetchPizzas({ search, categId, selectSort, sortAscDesc }));
+    }
     // setIsLoading(true);
     getPizzas();
-    setIsLoading(false);
-  }, [searchValue, categoryId, selectSort, sortAscDesc, search, categId]);
+    
+  }, [searchValue, categoryId, selectSort, sortAscDesc, search, categId, dispatch]);
   return (
     <div className='content'>
       <div className='container'>

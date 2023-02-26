@@ -21,7 +21,7 @@ export const PizzaInfo = () => {
 
     fetchPizzas();
     // fetchPizzas();
-  }, []);
+  }, [id]);
 
   if (!pizza) {
     return 'Загрузка...';
