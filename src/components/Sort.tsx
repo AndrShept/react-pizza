@@ -3,29 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSortId } from '../redux/slices/filterSlice';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import { AppContext } from '../App';
+import { RootState } from '../redux/store';
 
-export const Sort = () => {
-  const sortRef = React.useRef();
+export const Sort:React.FC = () => {
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const { sortLabel, setSortLabel } = React.useContext(AppContext);
 
-  const sortList = [
+  type SortType = {
+    name: string;
+    sortProperty: string;
+  }
+
+  const sortList:SortType[] = [
     { name: 'популярних', sortProperty: 'rating' },
     { name: 'ціні', sortProperty: 'price' },
     { name: 'алфавіту', sortProperty: 'title' },
   ];
   const [popupOpen, setPopupOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
-  const onClickListItem = (obj) => {
+  const sort = useSelector((state:RootState) => state.filter.sort);
+  const onClickListItem = (obj:SortType) => {
     dispatch(setSortId(obj));
     setPopupOpen(false);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event:MouseEvent) => {
       // console.log(event.composedPath());
-      let path = event.composedPath().includes(sortRef.current);
-      if (!path) setPopupOpen(false);
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)){
+        setPopupOpen(false);
+      }
+      
     };
 
     document.body.addEventListener('click', handleClickOutside);

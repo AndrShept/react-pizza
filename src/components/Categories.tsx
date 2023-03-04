@@ -1,7 +1,13 @@
 import React from 'react';
 
-export const Categories = ({categoryId,onChangeCategory}) => {
+type CategoryProps = {
+  categoryId: number;
+  onChangeCategory: (i:number) => void;
+}
+
+export const Categories:React.FC<CategoryProps> = ({categoryId,onChangeCategory}) => {
   
+
   const listPizza = [
     'Всі',
     'Мясна',

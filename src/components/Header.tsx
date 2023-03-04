@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import PizzaLogo from '../assets/img/pizza-logo.svg';
 import { SearchBlock } from './SearchBlock';
 import { useSelector,  } from 'react-redux';
+import { RootState } from '../redux/store';
 
 
-export const Header = () => {
-  const { items } = useSelector((state) => state.cart);
+export const Header:React.FC = () => {
+  const { items } = useSelector((state:RootState) => state.cart);
   const totalPrice = items.reduce(
-    (acc, item) => acc + item.count * item.price,
+    (acc:number, item) => acc + item.count * item.price,
     0
   );
-  const itemCount = items.reduce((acc, item) => acc + item.count, 0);
+  const itemCount = items.reduce((acc:number, item) => acc + item.count, 0);
   
 
   return (

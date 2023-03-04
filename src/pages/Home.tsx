@@ -4,19 +4,19 @@ import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import { Sort } from '../components/Sort';
 import { Categories } from '../components/Categories';
 import { AppContext } from '../App';
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
-import { fetchPizzas} from '../redux/slices/pizzaSlice';
+import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { RootState, useAppDispatch } from '../redux/store';
 
-export const Home = () => {
-  const { searchValue } = React.useContext(AppContext);
-  const { sortLabel } = React.useContext(AppContext);
+export const Home: React.FC = () => {
+  const { searchValue, sortLabel } = React.useContext(AppContext);
 
-  const sort = useSelector((state) => state.filter.sort.sortProperty);
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const { items, isLoading } = useSelector((state) => state.pizza);
-  const dispatch = useDispatch();
-  const onChangeCategory = (i) => {
+  const sort = useSelector((state:RootState) => state.filter.sort.sortProperty);
+  const categoryId = useSelector((state:RootState) => state.filter.categoryId);
+  const { items, isLoading } = useSelector((state:RootState) => state.pizza);
+  const dispatch = useAppDispatch();
+  const onChangeCategory = (i: number) => {
     dispatch(setCategoryId(i));
   };
   const search = searchValue ? `search=${searchValue}` : '';
@@ -24,16 +24,22 @@ export const Home = () => {
   const selectSort = sort ? `&orderBy=${sort}` : '';
   const sortAscDesc = sortLabel ? `&order=desc` : `&order=asc`;
 
-
-
   React.useEffect(() => {
     function getPizzas() {
+      
       dispatch(fetchPizzas({ search, categId, selectSort, sortAscDesc }));
     }
     // setIsLoading(true);
     getPizzas();
-    
-  }, [searchValue, categoryId, selectSort, sortAscDesc, search, categId, dispatch]);
+  }, [
+    searchValue,
+    categoryId,
+    selectSort,
+    sortAscDesc,
+    search,
+    categId,
+    dispatch,
+  ]);
   return (
     <div className='content'>
       <div className='container'>
@@ -48,7 +54,9 @@ export const Home = () => {
         <div className='content__items'>
           {isLoading
             ? [...new Array(8)].map((_, i) => <Skeleton key={i} />)
-            : items.map((value, i) =>  <PizzaBlock key={value.id} {...value} /> )}
+            : items.map((value) => (
+                <PizzaBlock key={value.id} {...value} />
+              ))}
         </div>
       </div>
     </div>

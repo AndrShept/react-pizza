@@ -6,7 +6,9 @@ import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { PizzaInfo } from './pages/PizzaInfo';
 
-export const AppContext = React.createContext();
+
+
+export const AppContext = React.createContext<any>(null);
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('');

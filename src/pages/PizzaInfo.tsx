@@ -2,8 +2,13 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const PizzaInfo = () => {
-  const [pizza, setPizza] = React.useState();
+type pizzaType = {
+  imageUrl: string;
+  title: string;
+  price: number;
+}
+export const PizzaInfo:React.FC = () => {
+  const [pizza, setPizza] = React.useState<pizzaType>();
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -24,7 +29,7 @@ export const PizzaInfo = () => {
   }, [id]);
 
   if (!pizza) {
-    return 'Загрузка...';
+    return <div>Загрузка...</div>;
   }
 
   //   fetchPizzas = ()
