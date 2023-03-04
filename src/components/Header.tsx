@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PizzaLogo from '../assets/img/pizza-logo.svg';
 import { SearchBlock } from './SearchBlock';
 import { useSelector,  } from 'react-redux';
@@ -7,6 +7,7 @@ import { RootState } from '../redux/store';
 
 
 export const Header:React.FC = () => {
+  const location = useLocation()
   const { items } = useSelector((state:RootState) => state.cart);
   const totalPrice = items.reduce(
     (acc:number, item) => acc + item.count * item.price,
@@ -27,9 +28,9 @@ export const Header:React.FC = () => {
             </div>
           </div>
         </Link>
-        <SearchBlock />
+        {location.pathname === '/' && <SearchBlock />}
         <div className='header__cart'>
-          <Link to='/cart' className='button button--cart'>
+         {location.pathname === '/' && <Link to='/cart' className='button button--cart'>
             <span>{totalPrice} грн</span>
             <div className='button__delimiter'></div>
             <svg
@@ -62,7 +63,7 @@ export const Header:React.FC = () => {
               />
             </svg>
             <span>{itemCount}</span>
-          </Link>
+          </Link>}
         </div>
       </div>
     </div>

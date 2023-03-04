@@ -18,7 +18,7 @@ export const Cart: React.FC = () => {
 
   const onClickAllClear = () => {
     if (window.confirm('Ви дійсно хочете видалити весь товар з корзини?'))
-      dispatch(clearItem(null));
+      dispatch(clearItem());
   };
   if (!totalCount) {
     return <CartEmpty />;
@@ -102,7 +102,7 @@ export const Cart: React.FC = () => {
             </div>
           </div>
 
-          {items.map((obj) => (
+          {items.map((obj: any) => (
             <CartItem key={obj.id} {...obj} />
           ))}
 

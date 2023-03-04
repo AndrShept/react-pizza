@@ -50,7 +50,7 @@ const pizzaSlice = createSlice({
     setItems(state, action:PayloadAction<TPizzaItems[]>) {
       state.items = action.payload;
     },
-    setIsLoading(state, action) {
+    setIsLoading(state, action:PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
   },
